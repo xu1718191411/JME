@@ -12,7 +12,10 @@ class PartnerCell: UITableViewCell {
 
     @IBOutlet weak var chatContent: UILabel!
     
+    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var chatView: UIView!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = UIColor.clear

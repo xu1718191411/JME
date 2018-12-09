@@ -54,6 +54,7 @@
             <connections>
                 <outlet property="chatContent" destination="mvs-zF-oTA" id="E4E-Cp-jqZ"/>
                 <outlet property="chatView" destination="Cct-ii-Qtn" id="CSa-wC-eMR"/>
+                <outlet property="timeLabel" destination="sa3-5G-aCL" id="AMf-qM-NJa"/>
             </connections>
             <point key="canvasLocation" x="53.600000000000001" y="44.07796101949026"/>
         </view>

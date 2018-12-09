@@ -55,6 +55,7 @@
             <connections>
                 <outlet property="ChatView" destination="gId-bt-b44" id="p3D-Ca-d4D"/>
                 <outlet property="chatContent" destination="Pzx-bY-gF9" id="hHG-Wr-G68"/>
+                <outlet property="contentLabel" destination="Pzx-bY-gF9" id="rrC-0q-DLc"/>
                 <outlet property="timeLabel" destination="hm1-0F-Vfq" id="MbZ-MH-ohg"/>
             </connections>
             <point key="canvasLocation" x="156" y="319.79010494752629"/>

@@ -58,7 +58,7 @@ class ViewController: UIViewController, UITableViewDataSource,UITableViewDelegat
     }
     
     func initData(){
-        let sentence1 = Sentence.init("Yo", NSDate.init(), Identity.YOU)
+        let sentence1 = Sentence.init("Yo", convertStringToNSDate("2015/03/04 12:34:56 +09:00","yyyy/MM/dd HH:mm:ss Z"), Identity.YOU)
         let sentence2 = Sentence.init("Sup?", NSDate.init(), Identity.ME)
         let sentence3 = Sentence.init("You workin today?", NSDate.init(), Identity.YOU)
         let sentence4 = Sentence.init("Yah,but I'm off early", NSDate.init(), Identity.ME)
@@ -93,15 +93,34 @@ class ViewController: UIViewController, UITableViewDataSource,UITableViewDelegat
         if chatSentence[indexPath.row].identiry == Identity.ME {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyChatItem") as!  MyChatCell
             cell.chatContent.text = chatSentence[indexPath.row].content
+            cell.timeLabel.text = convertNSDateToString(chatSentence[indexPath.row].time)
+            
             cell.ChatView.layer.cornerRadius = 15
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "PartnerItem") as! PartnerCell
             cell.chatContent.text = chatSentence[indexPath.row].content
             cell.chatView.layer.cornerRadius = 15
+            cell.timeLabel.text = convertNSDateToString(chatSentence[indexPath.row].time)
             return cell
         }
         
+    }
+    
+    //http://grandbig.github.io/blog/2016/02/19/swift-date/
+    func convertNSDateToString(_ dateShouldBeConverted:NSDate)->String{
+        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSSSS"
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.string(from: dateShouldBeConverted as Date)
+    }
+    
+    //https://qiita.com/k-yamada-github/items/8b6411959579fd6cd995
+    func convertStringToNSDate(_ stringShouldBeConverted:String,_ format: String)->NSDate{
+        let formatter: DateFormatter = DateFormatter()
+        formatter.calendar = Calendar.current
+        formatter.dateFormat = format
+        return formatter.date(from: stringShouldBeConverted)! as NSDate
     }
     
     
