@@ -18,6 +18,7 @@ class ViewController: UIViewController, UITableViewDataSource,UITableViewDelegat
         // Do any additional setup after loading the view, typically from a nib.
         setupUI()
         initData()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,16 +60,16 @@ class ViewController: UIViewController, UITableViewDataSource,UITableViewDelegat
     
     func initData(){
         let sentence1 = Sentence.init("Yo", convertStringToNSDate("2015/03/04 12:34:56 +09:00","yyyy/MM/dd HH:mm:ss Z"), Identity.YOU)
-        let sentence2 = Sentence.init("Sup?", NSDate.init(), Identity.ME)
-        let sentence3 = Sentence.init("You workin today?", NSDate.init(), Identity.YOU)
-        let sentence4 = Sentence.init("Yah,but I'm off early", NSDate.init(), Identity.ME)
-        let sentence5 = Sentence.init("What time?", NSDate.init(), .YOU)
-        let sentence6 = Sentence.init("5", NSDate.init(), .ME)
-        let sentence7 = Sentence.init("Maybe 5:30", NSDate.init(), .ME)
-        let sentence8 = Sentence.init("Sick. Wanna come over?", NSDate.init(), .YOU)
-        let sentence9 = Sentence.init("Sure thang", NSDate.init(), .ME)
-        let sentence10 = Sentence.init("I got somethin to do until 7 tho", NSDate.init(), .ME)
-        let sentence11 = Sentence.init("np", NSDate.init(), .YOU)
+        let sentence2 = Sentence.init("Sup?", convertStringToNSDate("2015/03/04 12:35:13 +09:00","yyyy/MM/dd HH:mm:ss Z"), Identity.ME)
+        let sentence3 = Sentence.init("You workin today?", convertStringToNSDate("2015/03/04 12:36:27 +09:00","yyyy/MM/dd HH:mm:ss Z"), Identity.YOU)
+        let sentence4 = Sentence.init("Yah,but I'm off early", convertStringToNSDate("2015/03/04 12:37:16 +09:00","yyyy/MM/dd HH:mm:ss Z"), Identity.ME)
+        let sentence5 = Sentence.init("What time?", convertStringToNSDate("2015/03/04 12:38:12 +09:00","yyyy/MM/dd HH:mm:ss Z"), .YOU)
+        let sentence6 = Sentence.init("5", convertStringToNSDate("2015/03/04 12:39:07 +09:00","yyyy/MM/dd HH:mm:ss Z"), .ME)
+        let sentence7 = Sentence.init("Maybe 5:30", convertStringToNSDate("2015/03/04 12:40:16 +09:00","yyyy/MM/dd HH:mm:ss Z"), .ME)
+        let sentence8 = Sentence.init("Sick. Wanna come over?", convertStringToNSDate("2015/03/04 12:41:12 +09:00","yyyy/MM/dd HH:mm:ss Z"), .YOU)
+        let sentence9 = Sentence.init("Sure thang", convertStringToNSDate("2015/03/04 12:42:12 +09:00","yyyy/MM/dd HH:mm:ss Z"), .ME)
+        let sentence10 = Sentence.init("I got somethin to do until 7 tho", convertStringToNSDate("2015/03/04 12:43:16 +09:00","yyyy/MM/dd HH:mm:ss Z"), .ME)
+        let sentence11 = Sentence.init("np", convertStringToNSDate("2015/03/04 12:44:56 +09:00","yyyy/MM/dd HH:mm:ss Z"), .YOU)
         
         chatSentence.append(sentence1)
         chatSentence.append(sentence2)
@@ -96,6 +97,7 @@ class ViewController: UIViewController, UITableViewDataSource,UITableViewDelegat
             cell.timeLabel.text = convertNSDateToString(chatSentence[indexPath.row].time)
             
             cell.ChatView.layer.cornerRadius = 15
+            cell.delegate = self
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "PartnerItem") as! PartnerCell
@@ -105,7 +107,9 @@ class ViewController: UIViewController, UITableViewDataSource,UITableViewDelegat
             return cell
         }
         
+        
     }
+    
     
     //http://grandbig.github.io/blog/2016/02/19/swift-date/
     func convertNSDateToString(_ dateShouldBeConverted:NSDate)->String{
@@ -126,3 +130,17 @@ class ViewController: UIViewController, UITableViewDataSource,UITableViewDelegat
     
 }
 
+extension ViewController: HotelBookingCellDelegate {
+    func bookingCellBookButtonTouched() {
+        // Do whatever you want
+        print("dream")
+        performSegue(withIdentifier: "gogogo", sender: chatSentence)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "gogogo" {
+            let explainController = segue.destination as! ExplainViewController
+            explainController.parameters = sender as! [Sentence]
+        }
+    }
+}
