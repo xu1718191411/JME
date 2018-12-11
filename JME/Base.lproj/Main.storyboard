@@ -26,14 +26,6 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="WTI-nN-d7x"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="orm-ck-lQK">
-                                <rect key="frame" x="164" y="711" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="ns5-I5-Ymf" kind="show" identifier="gogogo" id="29G-G6-aBM"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -46,6 +38,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="Kwl-AT-u8L" id="5nO-F3-1JZ"/>
+                        <segue destination="ns5-I5-Ymf" kind="show" identifier="gogogo" id="YRj-fI-H3N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -55,7 +48,7 @@
         <!--Explain View Controller-->
         <scene sceneID="9f6-kZ-8Ow">
             <objects>
-                <viewController modalPresentationStyle="currentContext" id="ns5-I5-Ymf" customClass="ExplainViewController" customModule="JME" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="ns5-I5-Ymf" customClass="ExplainViewController" customModule="JME" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleAspectFit" id="h4x-F8-R4t">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -63,14 +56,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rvY-Kf-5fO">
                                 <rect key="frame" x="35" y="204" width="305" height="414"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="時々、ネイティブは単語の最後の&quot;g&quot;を省略するよ！だからworkingはworkinになるんだ。" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7kR-35-djS">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7kR-35-djS">
                                         <rect key="frame" x="4" y="215" width="297" height="133"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Sometimes native speakers drop the &quot;g&quot; at the end of a word.So &quot;working&quot; becomes &quot;workin&quot;." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dH8-BW-vkp">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dH8-BW-vkp">
                                         <rect key="frame" x="4" y="45" width="297" height="133"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -89,7 +82,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.72894194162436543" green="0.66511563124068995" blue="0.67305543274318402" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.97484396449999999" green="0.99605888129999998" blue="0.1638580717" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="rvY-Kf-5fO" firstAttribute="top" secondItem="CpR-Ox-ASa" secondAttribute="top" constant="160" id="ghq-j0-40Q"/>
                             <constraint firstItem="rvY-Kf-5fO" firstAttribute="leading" secondItem="CpR-Ox-ASa" secondAttribute="leading" constant="35" id="hCK-tP-WuQ"/>

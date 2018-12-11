@@ -11,6 +11,7 @@
 		BC4EFFCF21BBDA0F000A3A07 /* PartnerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC4EFFCE21BBDA0F000A3A07 /* PartnerCell.xib */; };
 		BC4EFFD121BBF9E0000A3A07 /* Test.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC4EFFD021BBF9E0000A3A07 /* Test.xib */; };
 		BC4EFFD921BEA835000A3A07 /* ExplainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4EFFD821BEA835000A3A07 /* ExplainViewController.swift */; };
+		BC4EFFDD21BFF2DD000A3A07 /* CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4EFFDC21BFF2DD000A3A07 /* CellDelegate.swift */; };
 		BC91B08321B411CF00A02BD7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC91B08221B411CF00A02BD7 /* AppDelegate.swift */; };
 		BC91B08521B411CF00A02BD7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC91B08421B411CF00A02BD7 /* ViewController.swift */; };
 		BC91B08821B411CF00A02BD7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC91B08621B411CF00A02BD7 /* Main.storyboard */; };
@@ -45,6 +46,7 @@
 		BC4EFFCE21BBDA0F000A3A07 /* PartnerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PartnerCell.xib; sourceTree = "<group>"; };
 		BC4EFFD021BBF9E0000A3A07 /* Test.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Test.xib; sourceTree = "<group>"; };
 		BC4EFFD821BEA835000A3A07 /* ExplainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplainViewController.swift; sourceTree = "<group>"; };
+		BC4EFFDC21BFF2DD000A3A07 /* CellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDelegate.swift; sourceTree = "<group>"; };
 		BC91B07F21B411CF00A02BD7 /* JME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JME.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC91B08221B411CF00A02BD7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC91B08421B411CF00A02BD7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				BC4EFFCE21BBDA0F000A3A07 /* PartnerCell.xib */,
 				BC4EFFD021BBF9E0000A3A07 /* Test.xib */,
 				BC4EFFD821BEA835000A3A07 /* ExplainViewController.swift */,
+				BC4EFFDC21BFF2DD000A3A07 /* CellDelegate.swift */,
 			);
 			path = JME;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 			files = (
 				BC91B0CA21B9D35500A02BD7 /* PartnerCell.swift in Sources */,
 				BC91B08521B411CF00A02BD7 /* ViewController.swift in Sources */,
+				BC4EFFDD21BFF2DD000A3A07 /* CellDelegate.swift in Sources */,
 				BC91B08321B411CF00A02BD7 /* AppDelegate.swift in Sources */,
 				BC4EFFD921BEA835000A3A07 /* ExplainViewController.swift in Sources */,
 				BC91B0B521B5767100A02BD7 /* Sentence.swift in Sources */,

@@ -16,14 +16,15 @@ class ExplainViewController: UIViewController {
     
     @IBOutlet weak var japaneseExplain: UITextView!
     
-    var parameters: [Sentence] = []
+    var parameter: Sentence?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        englishExplain.text = parameters[0].content
-
+        englishExplain.text = parameter?.englishExplanation
+        japaneseExplain.text = parameter?.japaneseExplanation
         // Do any additional setup after loading the view.
+        
     }
     
     @IBAction func close(_ sender: UIButton) {

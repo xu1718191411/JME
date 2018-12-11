@@ -9,6 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource,UITableViewDelegate{
+    
 
     @IBOutlet weak var tableView: UITableView!
     var chatSentence:[Sentence] = []
@@ -62,6 +63,9 @@ class ViewController: UIViewController, UITableViewDataSource,UITableViewDelegat
         let sentence1 = Sentence.init("Yo", convertStringToNSDate("2015/03/04 12:34:56 +09:00","yyyy/MM/dd HH:mm:ss Z"), Identity.YOU)
         let sentence2 = Sentence.init("Sup?", convertStringToNSDate("2015/03/04 12:35:13 +09:00","yyyy/MM/dd HH:mm:ss Z"), Identity.ME)
         let sentence3 = Sentence.init("You workin today?", convertStringToNSDate("2015/03/04 12:36:27 +09:00","yyyy/MM/dd HH:mm:ss Z"), Identity.YOU)
+        sentence3.setEnglishExplanation("Sometimes native speakers drop the \"g\" at the end of a word.So \"working\" becomes \"workin\".")
+        sentence3.setJapaneseExplanation("時々、ネイティブは単語の最後の\"g\"を省略するよ！だからworkingはworkinになるんだ。")
+        
         let sentence4 = Sentence.init("Yah,but I'm off early", convertStringToNSDate("2015/03/04 12:37:16 +09:00","yyyy/MM/dd HH:mm:ss Z"), Identity.ME)
         let sentence5 = Sentence.init("What time?", convertStringToNSDate("2015/03/04 12:38:12 +09:00","yyyy/MM/dd HH:mm:ss Z"), .YOU)
         let sentence6 = Sentence.init("5", convertStringToNSDate("2015/03/04 12:39:07 +09:00","yyyy/MM/dd HH:mm:ss Z"), .ME)
@@ -104,13 +108,12 @@ class ViewController: UIViewController, UITableViewDataSource,UITableViewDelegat
             cell.chatContent.text = chatSentence[indexPath.row].content
             cell.chatView.layer.cornerRadius = 15
             cell.timeLabel.text = convertNSDateToString(chatSentence[indexPath.row].time)
+            cell.delegate = self
             return cell
         }
         
-        
     }
-    
-    
+
     //http://grandbig.github.io/blog/2016/02/19/swift-date/
     func convertNSDateToString(_ dateShouldBeConverted:NSDate)->String{
         let dateFormatter = DateFormatter()
@@ -130,17 +133,26 @@ class ViewController: UIViewController, UITableViewDataSource,UITableViewDelegat
     
 }
 
-extension ViewController: HotelBookingCellDelegate {
-    func bookingCellBookButtonTouched() {
-        // Do whatever you want
-        print("dream")
-        performSegue(withIdentifier: "gogogo", sender: chatSentence)
-    }
-    
+extension ViewController: CellDelegate {
+   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "gogogo" {
             let explainController = segue.destination as! ExplainViewController
-            explainController.parameters = sender as! [Sentence]
+            explainController.parameter = sender as? Sentence
         }
     }
+    
+    func CellContentClick(_ index: Int) {
+        print("dream\(index)")
+        
+        if let english = chatSentence[index].englishExplanation {
+            if let japanese = chatSentence[index].japaneseExplanation{
+                print(english)
+                print(japanese)
+                performSegue(withIdentifier: "gogogo", sender: chatSentence[index])
+            }
+        }
+    
+    }
+    
 }
