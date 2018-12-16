@@ -17,25 +17,27 @@ class StartUpViewController: UIViewController {
     private var panGestureRecognizer: UIPanGestureRecognizer!
     private var beganLocation: CGPoint = .zero
     private var beganState: Bool = false
+    private var sideMenuController:SideMenuViewController!
+    private var mainViewController:ViewController!
+    
     var isSlide:Bool = false
     var isShown: Bool {
-        return self.SideMenuConstraint.constant == -230
+        return self.SideMenuConstraint.constant != -230
     }
     private var contentMaxWidth: CGFloat {
         return view.bounds.width * 0.8
     }
     private var contentRatio: CGFloat {
         get {
-            return contentView.frame.maxX / contentMaxWidth
+            return (SideMenuConstraint.constant + 230) / 230
         }
         set {
             let ratio = min(max(newValue, 0), 1)
-            contentView.frame.origin.x = contentMaxWidth * ratio - contentView.frame.width
-            contentView.layer.shadowColor = UIColor.black.cgColor
-            contentView.layer.shadowRadius = 3.0
-            contentView.layer.shadowOpacity = 0.8
-            
-            view.backgroundColor = UIColor(white: 0, alpha: 0.3 * ratio)
+            sideMenuController.view.layer.shadowColor = UIColor.black.cgColor
+            sideMenuController.view.layer.shadowRadius = 3.0
+            sideMenuController.view.layer.shadowOpacity = 0.8
+            SideMenuConstraint.constant = -230 + ratio * 230
+
         }
     }
     
@@ -44,9 +46,8 @@ class StartUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        var sideMenuController =  self.children[1] as! SideMenuViewController
-        
-        var mainViewController =  self.children[0] as! ViewController
+        sideMenuController =  self.children[1] as! SideMenuViewController
+        mainViewController =  self.children[0] as! ViewController
         // Do any additional setup after loading the view.
         
         mainViewController.delegate = self
@@ -80,10 +81,11 @@ class StartUpViewController: UIViewController {
             beganLocation = location
             if translation.x  >= 0 {
 //                self.delegate?.sidemenuViewControllerDidRequestShowing(self, contentAvailability: false, animated: false)
-            showSideMenu(true)
+            //showSideMenu(true)
             }
         case .changed:
             let distance = beganState ? beganLocation.x - location.x : location.x - beganLocation.x
+       
             if distance >= 0 {
                 let ratio = distance / (beganState ? beganLocation.x : (view.bounds.width - beganLocation.x))
                 let contentRatio = beganState ? 1 - ratio : ratio
@@ -91,13 +93,22 @@ class StartUpViewController: UIViewController {
             }
             
         case .ended, .cancelled, .failed:
+
             if contentRatio <= 1.0, contentRatio >= 0 {
                 if location.x > beganLocation.x {
-//                    showContentView(animated: true)
-                    showSideMenu(true)
+                   
+                  showContentView(animated: true)
+         
+//                  self.SideMenuConstraint.constant = 0
+//                  UIView.animate(withDuration: 0.3) {
+//                         self.view.layoutIfNeeded()
+//                  }
+                    
                 } else {
-                    //self.delegate?.sidemenuViewControllerDidRequestHiding(self, animated: true)
-                    hideSideMenu(true)
+
+                    hideContentView(animated: true) { (Bool) in
+                        
+                    }
                 }
             }
             beganLocation = .zero
@@ -128,46 +139,38 @@ class StartUpViewController: UIViewController {
     }
     */
     
-    func hideSideMenu(_ animation:Bool){
-        SideMenuConstraint.constant = -230
-        if(animation){
+
+    
+    func showContentView(animated: Bool) {
+        if animated {
+            self.contentRatio = 1.0
             UIView.animate(withDuration: 0.3) {
                 self.view.layoutIfNeeded()
             }
+        } else {
+            contentRatio = 1.0
         }
     }
     
-    func showSideMenu(_ animation:Bool){
-        SideMenuConstraint.constant = 0
-        if(animation){
-            UIView.animate(withDuration: 0.3) {
+    func hideContentView(animated: Bool, completion: ((Bool) -> Swift.Void)?) {
+        if animated {
+            self.contentRatio = 0
+            UIView.animate(withDuration: 0.2, animations: {
                 self.view.layoutIfNeeded()
-            }
+            }, completion: { (finished) in
+                completion?(finished)
+            })
+        } else {
+            contentRatio = 0
+            completion?(true)
         }
     }
-    
-    func toggleSideMenu(){
-        
-        if(isSlide){
-            SideMenuConstraint.constant = -230
-        }else{
-            SideMenuConstraint.constant = 0
-        }
-        
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
-        }
-        
-        isSlide = !isSlide
-    }
-    
-    
 
 }
 
 extension StartUpViewController:SideMenuProtocol{
     func slide() {
-        toggleSideMenu()
+    
     }
 }
 
