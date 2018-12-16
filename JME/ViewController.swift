@@ -10,6 +10,9 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource,UITableViewDelegate{
     
+    
+    var delegate:SideMenuProtocol?
+
 
     @IBOutlet weak var tableView: UITableView!
     var chatSentence:[Sentence] = []
@@ -21,7 +24,16 @@ class ViewController: UIViewController, UITableViewDataSource,UITableViewDelegat
         initData()
         
     }
-
+    
+    @IBAction func flip(_ sender: UIButton) {
+        
+        
+        if(delegate != nil){
+            delegate?.slide()
+        }
+        
+    }
+    
     override func didReceiveMemoryWarning() {
             super.didReceiveMemoryWarning()
     }
